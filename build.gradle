@@ -12,15 +12,27 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("io.micronaut.data:micronaut-data-document-processor")
+    annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+
+    implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut:micronaut-http-client-jdk")
     implementation("io.micronaut.aws:micronaut-aws-apigateway")
     implementation("io.micronaut.aws:micronaut-aws-lambda-events-serde")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+
     compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
+    compileOnly("org.projectlombok:lombok")
+
     runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.mongodb:mongodb-driver-sync")
+    runtimeOnly("org.yaml:snakeyaml")
+
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("io.micronaut.aws:micronaut-function-aws-test")
 }
 
 

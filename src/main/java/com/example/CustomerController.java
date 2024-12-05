@@ -1,15 +1,17 @@
 package com.example;
 
-import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Produces;
+import lombok.AllArgsConstructor;
 
 @Controller("/customer")
+@AllArgsConstructor
 public class CustomerController {
+
+    private final CustomerControllerService service;
 
     @Get("/{id}")
     public Customer getCustomer(String id) {
-        return new Customer(id, "first", "last");
+        return service.get(id);
     }
 }

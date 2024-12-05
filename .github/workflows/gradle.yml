@@ -35,6 +35,6 @@ jobs:
       with:
         name: lambda
         path: |
-          build/libs/demo-micronaut-0.1-all.jar
+          build/libs/demo-micronaut-0.1-all-optimized.jar
           build/libs/demo-micronaut-0.1-lambda.zip
         retention-days: 5
