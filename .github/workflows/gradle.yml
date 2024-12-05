@@ -27,12 +27,14 @@ jobs:
     - name: Build
       run: ./gradlew build
 
-#    - name: Build Native Lambda
-#      run: ./gradlew buildNativeLambda
+    - name: Build Native Lambda
+      run: ./gradlew buildNativeLambda
 
-    - name: Upload Artifact
+    - name: Upload lambda jar
       uses: actions/upload-artifact@v4
       with:
-        name: lambda.zip
-        path: build/libs/demo-micronaut-0.1-all.jar
+        name: lambda
+        path: |
+          build/libs/demo-micronaut-0.1-all.jar
+          build/libs/demo-micronaut-0.1-lambda.zip
         retention-days: 5
