@@ -9,7 +9,3 @@ micronaut:
       swagger:
         mapping: /swagger/**
         paths: classpath:META-INF/swagger
-mongodb:
-  uri: mongodb://localhost:27017/demo-micronaut
-  database: demo-micronaut
-  collection: users

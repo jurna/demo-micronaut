@@ -1,7 +1,8 @@
 package com.example;
 
-import io.micronaut.serde.annotation.Serdeable;
+import io.micronaut.data.annotation.Id;
+import io.micronaut.data.annotation.MappedEntity;
 
-@Serdeable
-public record Customer(String id, String firstName, String lastName) {
+@MappedEntity
+public record Customer(@Id String id, String firstName, String lastName) {
 }
