@@ -1,4 +1,4 @@
-package com.example;
+package com.example.customer;
 
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;

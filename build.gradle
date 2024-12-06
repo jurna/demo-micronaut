@@ -18,6 +18,8 @@ dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
+    annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
 
     implementation("io.micronaut.data:micronaut-data-mongodb")
     implementation("io.micronaut:micronaut-http-client-jdk")
@@ -34,6 +36,7 @@ dependencies {
 
     testImplementation("org.mockito:mockito-core")
     testImplementation("io.micronaut.aws:micronaut-function-aws-test")
+    testImplementation("org.hamcrest:hamcrest")
 }
 
 

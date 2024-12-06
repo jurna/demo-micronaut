@@ -1,6 +1,8 @@
-package com.example;
+package com.example.customer;
 
-import org.junit.jupiter.api.AfterEach;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,8 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.test.annotation.MockBean;
 import jakarta.inject.Inject;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,23 +37,32 @@ class CustomerControllerTest {
         handler = new ApiGatewayProxyRequestEventFunction(context);
     }
 
-    @AfterEach
-    void cleanup() {
-        handler.getApplicationContext().close();
-    }
-
     @Test
-    void testHandler() {
-        when(customerControllerService.get("1")).thenReturn(new Customer("1", "first", "last"));
+    void testGetCustomer() {
+        when(customerControllerService.get("1")).thenReturn(Optional.of(new Customer("1", "first", "last")));
         APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
         request.setPath("/customer/1");
         request.setHttpMethod(HttpMethod.GET.toString());
         var response = handler.handleRequest(request, new MockLambdaContext());
 
-        assertEquals(HttpStatus.OK.getCode(), response.getStatusCode());
-        assertEquals("{\"id\":\"1\",\"firstName\":\"first\",\"lastName\":\"last\"}", response.getBody());
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK.getCode()));
+        assertThat(response.getBody(), equalTo("{\"id\":\"1\",\"firstName\":\"first\",\"lastName\":\"last\"}"));
 
         verify(customerControllerService).get("1");
+    }
+
+    @Test
+    void testGetCustomers() {
+        when(customerControllerService.get()).thenReturn(List.of(new Customer("1", "first", "last")));
+        APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
+        request.setPath("/customer");
+        request.setHttpMethod(HttpMethod.GET.toString());
+        var response = handler.handleRequest(request, new MockLambdaContext());
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK.getCode()));
+        assertThat(response.getBody(), equalTo("[{\"id\":\"1\",\"firstName\":\"first\",\"lastName\":\"last\"}]"));
+
+        verify(customerControllerService).get();
     }
 
     @MockBean(CustomerControllerService.class)
