@@ -18,7 +18,7 @@ class CustomerRepositoryTest {
         Customer customer = new Customer("1", "first", "last");
         var saved = customerRepository.save(customer);
 
-        var loaded = customerRepository.findById(saved.id());
+        var loaded = customerRepository.findById(saved.getId());
 
         assertTrue(loaded.isPresent());
     }
