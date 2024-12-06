@@ -1,0 +1,9 @@
+POST https://mj4itc9sde.execute-api.eu-central-1.amazonaws.com/test/customer
+Host: mj4itc9sde.execute-api.eu-central-1.amazonaws.com
+protocol: https
+content-type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe"
+}

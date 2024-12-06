@@ -12,13 +12,17 @@ import lombok.AllArgsConstructor;
 public class CustomerControllerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     public @NonNull Optional<Customer> get(String id) {
         return customerRepository.findById(id);
     }
 
     public @NonNull List<Customer> get() {
-        return customerRepository.findAll()
-                ;
+        return customerRepository.findAll();
+    }
+
+    public @NonNull Customer save(CustomerForm customer) {
+        return customerRepository.save(customerMapper.toCustomer(customer));
     }
 }

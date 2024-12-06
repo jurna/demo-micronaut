@@ -65,6 +65,21 @@ class CustomerControllerTest {
         verify(customerControllerService).get();
     }
 
+    @Test
+    void testPostCustomer() {
+        when(customerControllerService.save(new CustomerForm("first", "last"))).thenReturn(new Customer("1", "first", "last"));
+        APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
+        request.setPath("/customer");
+        request.setHttpMethod(HttpMethod.POST.toString());
+        request.setBody("{\"firstName\":\"first\",\"lastName\":\"last\"}");
+        var response = handler.handleRequest(request, new MockLambdaContext());
+
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK.getCode()));
+        assertThat(response.getBody(), equalTo("{\"id\":\"1\",\"firstName\":\"first\",\"lastName\":\"last\"}"));
+
+        verify(customerControllerService).save(new CustomerForm("first", "last"));
+    }
+
     @MockBean(CustomerControllerService.class)
     CustomerControllerService customerControllerService() {
         return mock(CustomerControllerService.class);

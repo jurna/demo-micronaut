@@ -9,3 +9,6 @@ micronaut:
       swagger:
         mapping: /swagger/**
         paths: classpath:META-INF/swagger
+mongodb:
+  package-names:
+    - com.example.customer
