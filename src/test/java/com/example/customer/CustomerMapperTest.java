@@ -25,4 +25,16 @@ public class CustomerMapperTest {
         assertThat(customer.getLastName(), equalTo("Doe"));
     }
 
+    @Test
+    void testToView() {
+        Customer customer = new Customer("1", "John", "Doe");
+
+        CustomerView view = customerMapper.toView(customer);
+
+        assertThat(view, notNullValue());
+        assertThat(view.id(), equalTo("1"));
+        assertThat(view.firstName(), equalTo("John"));
+        assertThat(view.lastName(), equalTo("Doe"));
+    }
+
 }

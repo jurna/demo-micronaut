@@ -7,4 +7,6 @@ import jakarta.inject.Singleton;
 public interface CustomerMapper {
     @Mapper
     Customer toCustomer(CustomerForm form);
+    @Mapper
+    CustomerView toView(Customer customer);
 }
