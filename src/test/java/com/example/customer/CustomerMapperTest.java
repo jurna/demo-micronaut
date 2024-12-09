@@ -1,5 +1,7 @@
 package com.example.customer;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -27,7 +29,7 @@ public class CustomerMapperTest {
 
     @Test
     void testToView() {
-        Customer customer = new Customer("1", "John", "Doe");
+        Customer customer = new Customer("1", "John", "Doe", List.of());
 
         CustomerView view = customerMapper.toView(customer);
 

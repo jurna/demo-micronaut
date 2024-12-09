@@ -39,7 +39,7 @@ class CustomerControllerTest {
 
     @Test
     void testGetCustomer() {
-        when(customerControllerService.get("1")).thenReturn(Optional.of(new Customer("1", "first", "last")));
+        when(customerControllerService.get("1")).thenReturn(Optional.of(new Customer("1", "first", "last", List.of())));
         APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
         request.setPath("/customer/1");
         request.setHttpMethod(HttpMethod.GET.toString());
@@ -53,7 +53,7 @@ class CustomerControllerTest {
 
     @Test
     void testGetCustomers() {
-        when(customerControllerService.get()).thenReturn(List.of(new Customer("1", "first", "last")));
+        when(customerControllerService.get()).thenReturn(List.of(new Customer("1", "first", "last", List.of())));
         APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
         request.setPath("/customer");
         request.setHttpMethod(HttpMethod.GET.toString());
@@ -67,7 +67,7 @@ class CustomerControllerTest {
 
     @Test
     void testPostCustomer() {
-        when(customerControllerService.save(new CustomerForm("first", "last"))).thenReturn(new Customer("1", "first", "last"));
+        when(customerControllerService.save(new CustomerForm("first", "last"))).thenReturn(new Customer("1", "first", "last", List.of()));
         APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
         request.setPath("/customer");
         request.setHttpMethod(HttpMethod.POST.toString());

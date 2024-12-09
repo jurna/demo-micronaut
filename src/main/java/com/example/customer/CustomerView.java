@@ -1,7 +1,7 @@
 package com.example.customer;
 
-import io.micronaut.serde.annotation.Serdeable;
+import io.micronaut.core.annotation.Introspected;
 
-@Serdeable
+@Introspected
 public record CustomerView(String id, String firstName, String lastName) {
 }

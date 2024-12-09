@@ -1,5 +1,7 @@
 package com.example.customer;
 
+import java.util.List;
+
 import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
@@ -17,4 +19,6 @@ public final class Customer {
     private String id;
     private String firstName;
     private String lastName;
+
+    private List<ChangeLog> changeLogs;
 }
